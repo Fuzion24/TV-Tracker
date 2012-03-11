@@ -62,10 +62,11 @@ class WikiScraper
 			#We could probably be a bit smarter about this by checking the Header tags on the page for regex matches on 
 			#"Season" etc
 			skip_table = false
-			%w["SeriesNum", "EpisodeNum", "EpisodeName", "AirDate"].each do |key|
+			["SeriesNum", "EpisodeNum", "EpisodeName", "AirDate"].each do |key|
 				if table_headings[key].nil?
 					skip_table = true 
 					puts "Skipping table with keys: #{table_headings.inspect} because #{key} is nil"
+					break
 				end
 			end
 			if skip_table
