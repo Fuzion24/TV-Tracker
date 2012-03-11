@@ -3,6 +3,7 @@ class ConvertShow
 	def self.persist_tv_show(tv_show)
 		show = ::TvShow.new
 		show.name = tv_show[:name]
+		show.tv_image = convert_and_save_logo(tv_show[:logo_path]) if tv_show[:logo_path]
 		show.tv_seasons = convert_seasons(tv_show[:seasons])
 		show.save
 	end
@@ -13,6 +14,32 @@ class ConvertShow
 				:tv_episodes => convert_episodes(season[:episodes])
 			)
 		end
+	end
+
+	def self.get_file_name(path)
+		last_slash = path.rindex("\/")
+		if last_slash.nil?
+			last_slash = 0 
+		else
+			last_slash += 1
+		end
+		return path[last_slash..path.length-1]
+	end
+
+	def self.convert_and_save_logo(path)
+		path = path[2..path.length]
+      	url = URI.parse("http://#{path}")
+      	ua = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_3) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.78 Safari/535.11'
+  		req = Net::HTTP::Get.new(url.path, { 'User-Agent' => ua })
+  		res =  Net::HTTP.start(url.host, url.port) { |http| http.request(req) }
+
+		tv_img = TvImage.new(  :file_name => get_file_name(path), 
+					  :content_type => res['Content-type'], 
+					  :file_size => res.body.size, 
+					  :file_data => res.body)
+
+		return tv_img
+
 	end
 
 	def self.convert_episodes(episodes)
@@ -27,31 +54,3 @@ class ConvertShow
 		end
 	end
 end   
-
-# class TVHelper
-# 	def self.show(show_name)
-# 		{
-# 			:name 			=> show_name,
-# 			:seasons		=> []
-# 		}
-# 	end
-
-# 	def self.season(season_num, season_premiere, season_finale)
-# 		{
-# 			:season_num 		=> season_num,
-# 			:season_premiere    => season_premiere,
-# 			:season_finale		=> season_finale,
-# 			:episodes 			=> []
-# 		}
-# 	end
-
-# 	def self.episode(series_num, episode_num, episode_name, air_date, description)
-# 		{
-# 			:series_num			=> series_num,
-# 			:episode_number 	=> episode_num,
-# 			:name 				=> episode_name,
-# 			:air_date			=> air_date,
-# 			:description        => description
-# 		}
-# 	end
-# end

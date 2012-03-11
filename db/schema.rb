@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120310220529) do
+ActiveRecord::Schema.define(:version => 20120311051447) do
 
   create_table "tv_episodes", :force => true do |t|
     t.integer  "tv_season_id"
@@ -19,6 +19,16 @@ ActiveRecord::Schema.define(:version => 20120310220529) do
     t.string   "name"
     t.text     "description"
     t.date     "airdate"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tv_images", :force => true do |t|
+    t.integer  "tv_show_id"
+    t.string   "file_name"
+    t.string   "content_type"
+    t.integer  "file_size"
+    t.binary   "file_data"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
