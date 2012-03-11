@@ -13,7 +13,7 @@
 ActiveRecord::Schema.define(:version => 20120310220529) do
 
   create_table "tv_episodes", :force => true do |t|
-    t.integer  "tv_series_id"
+    t.integer  "tv_season_id"
     t.integer  "number"
     t.integer  "seriesnum"
     t.string   "name"

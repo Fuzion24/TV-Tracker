@@ -35,6 +35,7 @@ class WikiScraper
 	def self.scrape_show(show_name)
 		tv_show = TVHelper.show(show_name)
 		url = "http://en.wikipedia.org/wiki/List_of_#{show_name}_episodes"
+		puts url
 		doc = Nokogiri::HTML(open(URI.escape(url)))
 		doc.css('div#content div#bodyContent div[lang=en] table[class=wikitable]').each_with_index do |tv_season_html, i|
 			next if i == 0 #this is the table with a list of all the seasons
@@ -47,6 +48,7 @@ class WikiScraper
 					when "\342\204\226" 			then key = "SeriesNum"
 						when /No. in\sseries/ 		then key = "SeriesNum"
 					when /air date/ 				then key = "AirDate"
+						when /Original Airdate/		then key = "AirDate"
 					when /Written/  				then key = "Writer"
 					when /Title/ 					then key = "EpisodeName"
 					when /#/ 						then key = "EpisodeNum"
@@ -55,6 +57,22 @@ class WikiScraper
 				end
 				table_headings[key] = index
 			end
+
+			#For now skip tables were we are missing necessary keys.. 
+			#We could probably be a bit smarter about this by checking the Header tags on the page for regex matches on 
+			#"Season" etc
+			skip_table = false
+			%w["SeriesNum", "EpisodeNum", "EpisodeName", "AirDate"].each do |key|
+				if table_headings[key].nil?
+					skip_table = true 
+					puts "Skipping table with keys: #{table_headings.inspect} because #{key} is nil"
+				end
+			end
+			if skip_table
+				#puts tv_season_html
+				next 
+			end
+
 
 			tv_season = TVHelper.season(i,nil,nil)
 
