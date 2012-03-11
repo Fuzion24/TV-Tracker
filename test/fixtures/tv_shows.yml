@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  network: MyString
+  premiered: 2012-03-10
+  description: MyText
+
+two:
+  name: MyString
+  network: MyString
+  premiered: 2012-03-10
+  description: MyText

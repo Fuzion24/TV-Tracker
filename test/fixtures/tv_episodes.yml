@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  number: 1
+  description: MyText
+  airdate: 2012-03-10
+
+two:
+  number: 1
+  description: MyText
+  airdate: 2012-03-10
