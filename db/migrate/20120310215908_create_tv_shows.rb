@@ -3,6 +3,7 @@ class CreateTvShows < ActiveRecord::Migration
     create_table :tv_shows do |t|
       t.string :name
       t.string :network
+      t.datetime :air_time
       t.date :premiered
       t.text :description
 
