@@ -7,6 +7,7 @@ gem 'rails', '3.1.0'
 
 gem "mysql2",                         "0.3.11"        # Database adapter
 gem "nokogiri",                       "1.5.0" 
+gem "haml",                           "3.1.2"         # HTML templating DSL
 gem 'json'
 
 # Gems used only for assets and not required
