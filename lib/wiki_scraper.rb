@@ -55,15 +55,14 @@ class WikiScraper
 					when /Title/ 					then key = "EpisodeName"
 					when /#/ 						then key = "EpisodeNum"
 						when /No. in\sseason/		then key = "EpisodeNum"
-					else 
-						key = heading.text
+					else key = heading.text
 				end
 				table_headings[key] = index
 			end	
 			return table_headings
 	end
 
-	def self.table_has_necessary_keys?(table_keys)
+	def self.table_does_not_necessary_keys?(table_keys)
 			#For now skip tables were we are missing necessary keys.. 
 			#We could probably be a bit smarter about this by checking the Header tags on the page for regex matches on 
 			#"Season" etc
@@ -104,12 +103,13 @@ class WikiScraper
 			#puts "\n\nSeason #{i}"
 
 			table_legend = standarize_table_keys(tv_season_html.css("tr th"))
-			next if !table_has_necessary_keys?(table_legend)
+			next if table_does_not_necessary_keys?(table_legend)
 
 			tv_season = TVHelper.season(i,nil,nil)
 
 			tv_season_html.css("tr").each_with_index do |episode, index|
 				next if episode["class"] !=  "vevent"
+
 				episode_items 	= episode.css("td")
 				series_num 		= 	episode_items[table_legend["SeriesNum"]].text
 				episode_num 	= 	episode_items[table_legend["EpisodeNum"]].text
@@ -124,6 +124,7 @@ class WikiScraper
 				else
 					description = ""
 				end
+
 				tv_season[:episodes] << TVHelper.episode(series_num, episode_num, episode_name, air_date, description)
 				#puts "\n#{series_num} #{episode_num} #{episode_name} #{air_date} \n\t Description: #{description}"
 			end
