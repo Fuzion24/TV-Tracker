@@ -1,0 +1,10 @@
+- @tv_show.tv_seasons.each do |tv_season|
+  %h2="Season #{tv_season.number}"
+
+  %table{:class => "table table-striped"}
+    - tv_season.tv_episodes.each do |tv_episode|
+      %tr
+        %td 
+          =link_to tv_episode.name, tv_episode
+        %td
+          =tv_episode.airdate
