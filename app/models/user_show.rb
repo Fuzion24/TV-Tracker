@@ -1,4 +1,4 @@
 class UserShow < ActiveRecord::Base
 	belongs_to :user
-  	belongs_to :tv_episode
+  	belongs_to :tv_show
 end
