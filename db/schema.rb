@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120311230542) do
+ActiveRecord::Schema.define(:version => 20120313010639) do
 
   create_table "tv_episodes", :force => true do |t|
     t.integer  "tv_season_id"
@@ -54,6 +54,13 @@ ActiveRecord::Schema.define(:version => 20120311230542) do
   create_table "user_episodes", :force => true do |t|
     t.integer  "user_id"
     t.integer  "tv_episode_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "user_shows", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "tv_show_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
