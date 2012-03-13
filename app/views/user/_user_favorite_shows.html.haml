@@ -2,6 +2,6 @@
   - @user_shows.each do |tv_show|
     %tr
       %td 
-        Picture Here
-      %td
+        / -if !tv_show.tv_image.nil?
+        /   =send_data(tv_show.tv_image.file_data, :type => tv_show.tv_image.content_type,:filename => tv_show.tv_image.file_name,:disposition => 'inline')
         =tv_show.name

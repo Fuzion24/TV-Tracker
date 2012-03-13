@@ -1,0 +1,44 @@
+development:
+  :show:
+    :icon:
+      :styles:
+        :tiny: '15x15'
+        :small: '30x30'
+        :medium: '72x72'
+      :path: ':rails_root/public/system/show_icons/:path/:style/:sha1.:extension'
+      :url: '/system/show_icons/:path/:style/:sha1.:extension'
+      :default_url: '/system/default/:attachment/:style/default.png'
+
+test:
+  :show:
+    :icon:
+      :styles:
+        :tiny: '15x15'
+        :small: '30x30'
+        :medium: '72x72'
+      :path: ':rails_root/public/system/show_icons/:path/:style/:sha1.:extension'
+      :url: '/system/show_icons/:path/:style/:sha1.:extension'
+      :default_url: '/system/default/:attachment/:style/default.png'
+
+# TODO: Still need to fix the settings below = Ken
+staging:
+  :show:
+    :icon:
+      :styles:
+        :tiny: '15x15'
+        :small: '30x30'
+        :medium: '72x72'
+      :path: ':rails_root/public/system/show_icons/:path/:style/:sha1.:extension'
+      :url: '/system/show_icons/:path/:style/:sha1.:extension'
+      :default_url: '/system/default/:attachment/:style/default.png'
+
+production:
+  :show:
+    :icon:
+      :styles:
+        :tiny: '15x15'
+        :small: '30x30'
+        :medium: '72x72'
+      :path: ':rails_root/public/system/show_icons/:path/:style/:sha1.:extension'
+      :url: '/system/show_icons/:path/:style/:sha1.:extension'
+      :default_url: '/system/default/:attachment/:style/default.png'
