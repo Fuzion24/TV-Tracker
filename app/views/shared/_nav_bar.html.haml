@@ -2,10 +2,9 @@
   .navbar-inner
     .container
       %ul.nav
-        %li
-          %a.brand T.V. Tracker
+        %a.brand T.V. Tracker
         %li.active
-          %a{:href => "#"} Home
+          =link_to "All shows", tv_shows_path
         %li
           %a{:href => "#"} Test
         %li
@@ -18,3 +17,6 @@
                 %a{:href => "#"} Link
               %li
                 %a{:href => "#"} Link2
+        %li
+          %form{:class => "navbar-search pull-right"}
+            %input{:type => "text", :class => "search-query", :placeholder => "Search for Show"}
