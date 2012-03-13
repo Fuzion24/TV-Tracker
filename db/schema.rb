@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(:version => 20120313010639) do
     t.date     "premiered"
     t.text     "description"
     t.string   "icon_file_name"
+    t.string   "icon_sha1"
     t.string   "icon_content_type", :limit => 40
     t.integer  "icon_file_size"
     t.datetime "created_at"
