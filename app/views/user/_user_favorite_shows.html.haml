@@ -11,8 +11,7 @@
       %td 
         =tv_show.name
       %td
-        -last_air = tv_show.tv_episodes.limit(1).where("airdate <= ?", '3/20/2012').first
-        =last_air.airdate if !last_air.nil?
+        =TvShowsHelper.last_air_date(tv_show)
         /=tv_show.tv_seasons[0].tv_episodes[0].airdate
       %td
-        =last_air.airdate if !last_air.nil?
+        =TvShowsHelper.next_air_date(tv_show)
