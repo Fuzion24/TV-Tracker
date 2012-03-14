@@ -9,4 +9,4 @@ config/paperclip.yml
 *.swp
 *.swo
 .DS_store
-public/system/*
+public/system/show_icons/*
