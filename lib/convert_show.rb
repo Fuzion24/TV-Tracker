@@ -39,6 +39,7 @@ class ConvertShow
   		f.close
   		show.icon = File.new(f_name, "r")
   		show.icon_file_name= file_sha1 
+  		show.icon_sha1 = file_sha1
 	end
 
 	def self.convert_episodes(episodes)
