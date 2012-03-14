@@ -18,12 +18,12 @@ namespace :tv_show do
 			"Arrested_Development", "Californication", "The_Big_Bang_Theory","Archer","The_Office_(U.S._TV_series)", \
 			"How_I_Met_Your_Mother", "Prison_Break", "Dexter", "Tosh.0" \
 		].each do |show_name|
-			begin
+			#begin
 				tv_show = WikiScraper.scrape_show(show_name)
 				ConvertShow.persist_tv_show(tv_show)
-			rescue
-				puts "Failed to scan #{show_name}"
-			end
+			#rescue
+			#	puts "Failed to scan #{show_name}"
+			#end
 		end
 	end
 end

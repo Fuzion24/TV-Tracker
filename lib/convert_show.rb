@@ -3,7 +3,7 @@ class ConvertShow
 	def self.persist_tv_show(tv_show)
 		show = ::TvShow.new
 		show.name = tv_show[:name]
-		show.tv_image = convert_and_save_logo(tv_show[:logo_path]) if tv_show[:logo_path]
+		convert_and_save_logo(tv_show[:logo_path], show) if tv_show[:logo_path]
 		show.tv_seasons = convert_seasons(tv_show[:seasons])
 		show.save
 	end
@@ -26,20 +26,20 @@ class ConvertShow
 		return path[last_slash..path.length-1]
 	end
 
-	def self.convert_and_save_logo(path)
+	def self.convert_and_save_logo(path, show)
 		path = path[2..path.length]
       	url = URI.parse("http://#{path}")
       	ua = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_3) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.78 Safari/535.11'
   		req = Net::HTTP::Get.new(url.path, { 'User-Agent' => ua })
   		res =  Net::HTTP.start(url.host, url.port) { |http| http.request(req) }
-
-		tv_img = TvImage.new(  :file_name => get_file_name(path), 
-					  :content_type => res['Content-type'], 
-					  :file_size => res.body.size, 
-					  :file_data => res.body)
-
-		return tv_img
-
+  		file_sha1 = Digest::SHA1.hexdigest(res.body)
+  		f_name = "#{Rails.root}/tmp/#{file_sha1}"
+  		f = File.new(f_name, "w")
+  		f.write(res.body)
+  		f.close
+  		show.icon = File.new(f_name, "r")
+  		show.icon_file_name= file_sha1 
+  		show.icon_sha1 = file_sha1
 	end
 
 	def self.convert_episodes(episodes)

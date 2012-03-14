@@ -1,7 +1,7 @@
 %table{:class => "table table-striped"}
   - @user_shows.each do |tv_show|
     %tr
-      %td 
-        Picture Here
       %td
+        =image_tag(tv_show.icon(:medium))
+      %td 
         =tv_show.name
