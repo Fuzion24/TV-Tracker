@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(:version => 20120314001817) do
     t.integer  "tv_season_id"
     t.integer  "number"
     t.integer  "seriesnum"
+    t.integer  "season_number"
     t.string   "name"
     t.text     "description"
     t.date     "airdate"

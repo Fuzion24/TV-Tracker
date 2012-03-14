@@ -1,7 +1,18 @@
 %table{:class => "table table-striped"}
+  %tr
+    %th
+    %th Show Name
+    %th Last Airing
+    %th Next Airing
   - @user_shows.each do |tv_show|
     %tr
       %td
         =image_tag(tv_show.icon(:medium))
       %td 
         =tv_show.name
+      %td
+        -last_air = tv_show.tv_episodes.limit(1).where("airdate <= ?", '3/20/2012').first
+        =last_air.airdate if !last_air.nil?
+        /=tv_show.tv_seasons[0].tv_episodes[0].airdate
+      %td
+        =last_air.airdate if !last_air.nil?

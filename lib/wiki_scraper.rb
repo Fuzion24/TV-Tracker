@@ -20,9 +20,10 @@ class TVHelper
 		}
 	end
 
-	def self.episode(series_num, episode_num, episode_name, air_date, description)
+	def self.episode(series_num, episode_num, season_number, episode_name, air_date, description)
 		{
 			:series_num			=> series_num,
+			:season_num			=> season_number,
 			:episode_number 	=> episode_num,
 			:episode_name 		=> episode_name,
 			:air_date			=> air_date,
@@ -125,7 +126,7 @@ class WikiScraper
 					description = ""
 				end
 
-				tv_season[:episodes] << TVHelper.episode(series_num, episode_num, episode_name, air_date, description)
+				tv_season[:episodes] << TVHelper.episode(series_num, episode_num,i, episode_name, air_date, description)
 				#puts "\n#{series_num} #{episode_num} #{episode_name} #{air_date} \n\t Description: #{description}"
 			end
 				tv_show[:seasons] << tv_season if tv_season[:episodes].count > 0

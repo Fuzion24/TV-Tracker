@@ -4,14 +4,18 @@ class ConvertShow
 		show = ::TvShow.new
 		show.name = tv_show[:name]
 		convert_and_save_logo(tv_show[:logo_path], show) if tv_show[:logo_path]
-		show.tv_seasons = convert_seasons(tv_show[:seasons])
+		show_episodes = []
+		show.tv_seasons = convert_seasons(tv_show[:seasons], show_episodes)
+		show.tv_episodes = show_episodes
 		show.save
 	end
-	def self.convert_seasons(seasons)
+	def self.convert_seasons(seasons, show_episodes)
 		seasons.collect do |season|
+			episodes = convert_episodes(season[:episodes])
+			show_episodes.concat(episodes)
 			::TvSeason.new(
 				:number => season[:season_num],
-				:tv_episodes => convert_episodes(season[:episodes])
+				:tv_episodes => episodes
 			)
 		end
 	end
@@ -47,6 +51,7 @@ class ConvertShow
 			::TvEpisode.new(
 				:name => episode[:episode_name],
 				:number => episode[:episode_number],
+				:season_number => episode[:season_num],
 				:seriesnum => episode[:series_num],
 				:description => episode[:description],
 				:airdate => 	episode[:air_date]
