@@ -8,4 +8,4 @@ config/database.yml
 config/paperclip.yml
 *.swp
 .DS_store
-public/system/*
+public/system/show_icons/*

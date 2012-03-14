@@ -2,6 +2,8 @@
   %tr
     %th
     %th Show Name
+    %th Network
+    %th Air Time
     %th Last Airing
     %th Next Airing
   - @user_shows.each do |tv_show|
@@ -11,7 +13,10 @@
       %td 
         =tv_show.name
       %td
+        =tv_show.network
+      %td
+        =tv_show.air_time
+      %td
         =TvShowsHelper.last_air_date(tv_show)
-        /=tv_show.tv_seasons[0].tv_episodes[0].airdate
       %td
         =TvShowsHelper.next_air_date(tv_show)
