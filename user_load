@@ -1,0 +1,15 @@
+u = User.new
+
+u.handle = "fuzion24"
+u.first_name = "Ryan"
+u.last_name = "Welton"
+
+episodes = TvEpisode.all
+
+u.tv_episodes << episodes[0]
+u.tv_episodes << episodes[5]
+u.tv_episodes << episodes[8]
+u.tv_episodes << episodes[10]
+u.tv_episodes << episodes[11]
+
+u.save
