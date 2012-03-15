@@ -5,6 +5,6 @@ module UserHelper
    }.flatten
   end
   def self.showdate(offset)
-        (Date.today + offset).strftime('%A') + ' ' + (Date.today + offset).strftime('%F')  
+        (Date.today + offset).strftime('%A %F')
   end 
 end
