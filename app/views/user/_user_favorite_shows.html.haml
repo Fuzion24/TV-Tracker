@@ -25,10 +25,11 @@
 
 -content_for :head do
   =javascript_include_tag "jquery.tablesorter.min.js"
+  =stylesheet_link_tag "sorted_table.css"
 
 :javascript
   $(document).ready(function()
       { 
-          $("#favshows").tablesorter(); 
+          $("#favshows").tablesorter({sortList: [[1,1]]} ); //initial sort on show name
       } 
   ); 
