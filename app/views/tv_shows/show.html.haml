@@ -1,6 +1,7 @@
 =render :partial => 'shared/nav_bar'
 %h1=@tv_show.name
-%br
+.well
+  %h1 Airing Today -- blah blah blah
 =image_tag(@tv_show.icon(:medium))
 %h2=@tv_show.description
 
