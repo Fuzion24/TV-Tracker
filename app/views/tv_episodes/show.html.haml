@@ -1,2 +1,16 @@
-=render :partial => 'shared/nav_bar'
-=render :partial => 'tv_shows/tv_table'
+=render :partial => 'shared/nav_bar'	
+
+.container-fluid
+  .row-fluid
+    .span4
+      %h1
+        =@tv_episode.tv_season.tv_show.name
+        \--
+        =@tv_episode.name
+      .well
+        %h4=@tv_episode.description
+    .span4
+      \Hello
+    .span4
+      =render :partial => 'tv_seasons/tv_seasons'
+      

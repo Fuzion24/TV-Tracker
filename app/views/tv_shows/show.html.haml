@@ -1,0 +1,7 @@
+=render :partial => 'shared/nav_bar'
+%h1=@tv_show.name
+%br
+=image_tag(@tv_show.icon(:medium))
+%h2=@tv_show.description
+
+=render :partial => 'tv_seasons/tv_seasons'
