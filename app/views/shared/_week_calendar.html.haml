@@ -1,0 +1,27 @@
+%table{:class =>'table table-bordered table-striped'}
+  %thead
+    %tr
+      %th
+        =UserHelper.showdate(-3)
+      %th
+        =UserHelper.showdate(-2)
+      %th
+        =UserHelper.showdate(-1)
+      %th
+        (Today)
+        =UserHelper.showdate(0)
+      %th
+        =UserHelper.showdate(1)
+      %th
+        =UserHelper.showdate(2)
+      %th
+        =UserHelper.showdate(3)
+  %tbody
+    %tr
+      - (-3..3).each do |offset| 
+        %td
+          - UserHelper.episodestoday(@user_shows, Date.today - offset).each do |tv_episode|
+            =link_to tv_episode.tv_season.tv_show.name, tv_episode.tv_season.tv_show
+            =link_to tv_episode.name, tv_episode
+            %br
+
