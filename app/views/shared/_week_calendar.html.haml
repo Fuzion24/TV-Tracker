@@ -1,27 +1,40 @@
 %table{:class =>'table table-bordered table-striped'}
   %thead
-    %tr
+    %tr{:style=> "center"}
       %th
-        =UserHelper.showdate(-3)
+        =UserHelper.day_of_week(-3)
+        <br/> 
+        =UserHelper.numeric_date(-3)
       %th
-        =UserHelper.showdate(-2)
+        =UserHelper.day_of_week(-2)
+        <br/> 
+        =UserHelper.numeric_date(-2)
       %th
-        =UserHelper.showdate(-1)
+        =UserHelper.day_of_week(-1)
+        <br/> 
+        =UserHelper.numeric_date(-1)
       %th
-        (Today)
-        =UserHelper.showdate(0)
+        =UserHelper.day_of_week(0)
+        <br/>(Today)
       %th
-        =UserHelper.showdate(1)
+        =UserHelper.day_of_week(1)
+        <br/> 
+        =UserHelper.numeric_date(1)
       %th
-        =UserHelper.showdate(2)
+        =UserHelper.day_of_week(2)
+        <br/> 
+        =UserHelper.numeric_date(2)
       %th
-        =UserHelper.showdate(3)
+        =UserHelper.day_of_week(3)
+        <br/> 
+        =UserHelper.numeric_date(3)
   %tbody
     %tr
       - (-3..3).each do |offset| 
         %td
           - UserHelper.episodestoday(@user_shows, Date.today - offset).each do |tv_episode|
             =link_to tv_episode.tv_season.tv_show.name, tv_episode.tv_season.tv_show
+            \--
             =link_to tv_episode.name, tv_episode
             %br
 
