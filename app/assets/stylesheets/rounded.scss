@@ -1,0 +1,9 @@
+$small-rounded: 3px;
+$med-rounded: 5px;
+$lg-rounded: 5px;
+
+@mixin border-rad($rounded) {
+  -webkit-border-radius: $rounded;
+  -moz-border-radius: $rounded;
+  border-radius: $rounded;
+}

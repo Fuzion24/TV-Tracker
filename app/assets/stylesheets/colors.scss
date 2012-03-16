@@ -1,0 +1,32 @@
+$lt-grey: #E5E5E5;
+$med-grey: #CCCCCC;
+$med-dark-grey: #888888;
+$dark-grey: #656565;
+$darker-grey: #424242;
+$darkest-grey: #343434;
+$white: #FFFFFF;
+
+$md-blue: #35AEE3;
+
+.pending { font-style: italic }
+.accepted { color: #23a129 !important }
+.rejected { color: #C43C35 !important }
+.malware { color: #C43C35 !important }
+.ok { color: #23a129 }
+
+.true { color : #00aa00 }
+.false { color : #C43C35 }
+
+.severity.critical-bg  { background: #C43C35 !important; color: #fff !important }
+.severity.high-bg      { background: #ff9f80 !important }
+.severity.medium-bg    { background: #ffc48c !important }
+.severity.low-bg       { background: #effab4 !important }
+.severity.info-bg      { background: #d1f2a5 !important }
+.severity.ok-bg        { background: #23a129 !important }
+
+.severity.critical  { color: #C43C35 !important }
+.severity.high      { color: #ff9f80 !important }
+.severity.medium    { color: #ffc48c !important }
+.severity.low       { color: #effab4 !important }
+.severity.info      { color: #d1f2a5 !important }
+

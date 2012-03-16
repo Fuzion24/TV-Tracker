@@ -11,3 +11,25 @@
         =tv_show.network
       %td
         =tv_show.air_time
+
+.item
+  .row-wrap
+    .img.column
+      = image_tag(android_app.icon(:small))
+    .meta-wrap
+      .grid-fade
+      .name.column
+        = link_to android_app.display_name, app_path(android_app), :class => 'stop-prop'
+      .meta.column.package
+        = android_app.uid
+    %br.clear
+  .latest
+    .meta.column.menu.stop-prop
+      = render :partial => 'admin/sambandi/drop_down', :locals => { :android_app => android_app }
+    .meta.column.state
+      = display_app_state(android_app, current_account)
+    .meta.column.fade-wrapper
+      .grid-fade
+      v
+      = android_app.version_name
+  .clear
