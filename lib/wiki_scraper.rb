@@ -16,6 +16,12 @@ class WikiScraper
 		show_name.gsub("_", " ")
 	end
 
+	def self.prepare_show_name(show_name)
+		show_name = show_name.split(' ').map {|w| "#{w[0].chr.capitalize + w[1, w.size]}" }.join('_')
+		show_name = show_name.split('-').map {|w| "#{w[0].chr.capitalize + w[1, w.size]}" }.join('-')
+		return show_name
+	end
+
 	def self.standarize_table_keys(headings)
 			table_headings = {}
 			headings.each_with_index do |heading, index|
@@ -70,7 +76,13 @@ class WikiScraper
 		url = "http://en.wikipedia.org/wiki/List_of_#{show_name}_episodes"
 		puts "Scraping #{url}" if DEBUG
 		doc = Nokogiri::HTML(open(URI.escape(url)))
-		tv_show[:logo_path] = find_logo(doc.css("img"))
+				
+		if !find_logo(doc.css("img")).nil?
+			imgpath = find_logo(doc.css("img"))
+			imgpath = imgpath[2..imgpath.length]
+			tv_show[:logo_path] = "http://#{imgpath}"
+		end
+		
 		tv_series_tables = doc.css('div#content div#bodyContent div[lang=en] table[class=wikitable]')
 		series_information(tv_series_tables[0], tv_show)
 		tv_series_tables.each_with_index do |tv_season_html, i|

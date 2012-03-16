@@ -5,17 +5,14 @@ require 'yaml'
 require 'CSV'
 require File.join(File.dirname(__FILE__), "tv_helper")
 
+class EpguidesScraper
 
-	def find_csv(links)
-		links.each do |link|	
-			return link['href'] if link['href'] =~ /exportToCSV/
-		end
-	end
-
-	def scrape_epguides(show_name)
+	def self.scrape_epguides(show_name)
 		tv_show =TVHelper.show(show_name)
-		url = "http://www.epguides.com/#{show_name}/"
+		url = "http://www.epguides.com/#{prepare_name(show_name)}/"
+		puts "Scraping #{url}"
 		doc = Nokogiri::HTML(open(URI.escape(url)))
+		tv_show[:logo_path] = find_img(url,doc)
 		csv_uri = find_csv(doc.css("a"))
 		csv_doc = Nokogiri::HTML(open(URI.escape(csv_uri)))
 		csv_data = csv_doc.css("pre")[0].text
@@ -35,6 +32,31 @@ require File.join(File.dirname(__FILE__), "tv_helper")
 			tv_seasons[season][:episodes] << TVHelper.episode(series_num, episode_num,season, episode_name, airdate, "")
 		end
 		tv_show[:seasons] = tv_seasons.values
+		return tv_show
 	end
 
-puts scrape_epguides("FamilyGuy").inspect
+private
+
+	def self.prepare_name(show_name)
+		show_name = show_name.gsub("The ", "")
+		show_name = show_name.gsub(".", "")
+		show_name = show_name.gsub(" " , "")
+		show_name = show_name.gsub("\n", "")
+		return show_name
+	end
+
+	def self.find_img(url, doc)
+		pic = nil
+		doc.css("img").each do |img|
+			pic = img['src'] if img["class"] =~ /CasLogPic/
+		end
+		return nil if pic.nil?
+		return "#{url}#{pic}"
+	end
+
+	def self.find_csv(links)
+		links.each do |link|	
+			return link['href'] if link['href'] =~ /exportToCSV/
+		end
+	end
+end

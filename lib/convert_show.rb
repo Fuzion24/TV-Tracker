@@ -1,8 +1,7 @@
 
 class ConvertShow
 	def self.persist_tv_show(tv_show)
-		show = ::TvShow.new
-		show.name = tv_show[:name]
+		show = ::TvShow.find_or_new(tv_show[:name])
 		convert_and_save_logo(tv_show[:logo_path], show) if tv_show[:logo_path]
 		show_episodes = []
 		show.tv_seasons = convert_seasons(tv_show[:seasons], show_episodes)
@@ -31,8 +30,7 @@ class ConvertShow
 	end
 
 	def self.convert_and_save_logo(path, show)
-		path = path[2..path.length]
-      	url = URI.parse("http://#{path}")
+      	url = URI.parse(URI.escape(path))
       	ua = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_3) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.78 Safari/535.11'
   		req = Net::HTTP::Get.new(url.path, { 'User-Agent' => ua })
   		res =  Net::HTTP.start(url.host, url.port) { |http| http.request(req) }
@@ -48,13 +46,13 @@ class ConvertShow
 
 	def self.convert_episodes(episodes)
 		episodes.collect do |episode|
-			::TvEpisode.new(
-				:name => episode[:episode_name],
-				:number => episode[:episode_number],
-				:season_number => episode[:season_num],
-				:seriesnum => episode[:series_num],
-				:description => episode[:description],
-				:airdate => 	episode[:air_date]
+			::TvEpisode.find_or_new(
+				episode[:episode_name],
+				episode[:episode_number],
+				episode[:season_num],
+				episode[:series_num],
+				episode[:description],
+				episode[:air_date]
 			)
 		end
 	end

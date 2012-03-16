@@ -3,7 +3,6 @@ namespace :tv_show do
 	task :scrape  => :environment do |t, args|
 		show_name = ENV['show']
 		if show_name
-			show_name.gsub!(" ", "_")
 			tv_show = WikiScraper.scrape_show(show_name)
 			ConvertShow.persist_tv_show(tv_show)
 		else
@@ -13,17 +12,23 @@ namespace :tv_show do
 
 	task :scrape_all  => :environment do |t, args|
 		TvShow.destroy_all
-		[   \
-			"Justified", "Mad_Men", "Family_Guy", "Breaking_Bad", "Lost", "True_Blood", \
-			"Arrested_Development", "Californication", "The_Big_Bang_Theory","Archer","The_Office_(U.S._TV_series)", \
-			"How_I_Met_Your_Mother", "Prison_Break", "Dexter", "Tosh.0" \
-		].each do |show_name|
-			#begin
-				tv_show = WikiScraper.scrape_show(show_name)
+		shows = File.new("#{Rails.root}/db/fixtures/SeedShows",'r')
+		shows.each_line do |show_name|
+			show_name.rstrip! 
+			begin
+				tv_show = EpguidesScraper.scrape_epguides(show_name)
 				ConvertShow.persist_tv_show(tv_show)
-			#rescue
-			#	puts "Failed to scan #{show_name}"
-			#end
+			rescue
+				puts "EpguidesScraper Failed to scan #{show_name}"
+			end
+
+			begin
+				prepped_name = WikiScraper.prepare_show_name(show_name)
+				tv_show = WikiScraper.scrape_show(prepped_name)
+				ConvertShow.persist_tv_show(tv_show)
+			rescue
+				puts "WikiScraper Failed to scan #{show_name}"
+			end
 		end
 	end
 end
