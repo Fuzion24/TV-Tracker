@@ -10,6 +10,10 @@ namespace :tv_show do
 		end
 	end
 
+	task :top_shows => :environment do |t,args|
+		ImdbScraper.top_shows
+	end
+
 	task :scrape_all  => :environment do |t, args|
 		TvShow.destroy_all
 		shows = File.new("#{Rails.root}/db/fixtures/SeedShows",'r')

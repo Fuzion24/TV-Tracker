@@ -18,4 +18,19 @@ class ImdbScraper
 		# 	puts show.inspect
 		# end
 	end
+
+	def self.top_shows
+		imdb = ImdbParty::Imdb.new
+		imdb.popular_shows.each_with_index do |show, i|
+			imdb_show = imdb.find_movie_by_id(show[:imdb_id])
+			tv_show = TvShow.find_or_new(imdb_show.title)
+			ConvertShow.convert_and_save_logo(imdb_show.poster_url, tv_show, true)
+			tv_show.description = imdb_show.plot
+			tv_show.premiered = imdb_show.release_date
+			tv_show.save
+
+			top_show = TopShow.find_or_new(tv_show,i)
+			top_show.save
+		end
+	end
 end
