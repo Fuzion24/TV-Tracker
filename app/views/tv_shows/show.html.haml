@@ -1,8 +1,20 @@
 =render :partial => 'shared/nav_bar'
-%h1=@tv_show.name
-.well
-  %h1 Airing Today -- blah blah blah
-=image_tag(@tv_show.icon(:medium))
-%h2=@tv_show.description
+
+.container-fluid
+  .row-fluid
+    %h1=@tv_show.name
+  .row-fluid
+    .span2
+      =image_tag(@tv_show.icon(:large))
+    .span4
+      .well
+        %h2=@tv_show.description
+  .row-fluid
+    .well
+      %h1 
+        Airing next in 
+        =(TvShowsHelper.next_air_date(@tv_show) - Date.today)
+        days from now on
+        =TvShowsHelper.next_air_date(@tv_show)
 
 =render :partial => 'tv_seasons/tv_seasons'

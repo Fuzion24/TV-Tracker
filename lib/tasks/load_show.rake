@@ -15,6 +15,8 @@ namespace :tv_show do
 		shows = File.new("#{Rails.root}/db/fixtures/SeedShows",'r')
 		shows.each_line do |show_name|
 			show_name.rstrip! 
+
+			ImdbScraper.scrape_imdb(show_name)
 			begin
 				tv_show = EpguidesScraper.scrape_epguides(show_name)
 				ConvertShow.persist_tv_show(tv_show)
@@ -25,10 +27,11 @@ namespace :tv_show do
 			begin
 				prepped_name = WikiScraper.prepare_show_name(show_name)
 				tv_show = WikiScraper.scrape_show(prepped_name)
-				ConvertShow.persist_tv_show(tv_show)
+				ConvertShow.persist_tv_show(tv_show,true)
 			rescue
 				puts "WikiScraper Failed to scan #{show_name}"
 			end
+
 		end
 	end
 end

@@ -11,7 +11,7 @@
     - @user_shows.each do |tv_show|
       %tr
         %td
-          =image_tag(tv_show.icon(:medium))
+          =image_tag(tv_show.icon(:large))
         %td 
           =link_to tv_show.name, tv_show
         %td

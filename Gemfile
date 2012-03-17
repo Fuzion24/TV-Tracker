@@ -9,6 +9,7 @@ gem "mysql2",                         "0.3.11"        # Database adapter
 gem "nokogiri",                       "1.5.0" 
 gem "haml",                           "3.1.2"         # HTML templating DSL
 gem "paperclip", 					  "~> 2.7"
+gem "imdb_party"
 gem 'json'
 
 # Gems used only for assets and not required

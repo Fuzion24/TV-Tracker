@@ -51,7 +51,12 @@ GEM
       haml (~> 3.0)
       railties (~> 3.0)
     hike (1.2.1)
+    httparty (0.8.1)
+      multi_json
+      multi_xml
     i18n (0.6.0)
+    imdb_party (0.6.1)
+      httparty
     jquery-rails (1.0.19)
       railties (~> 3.0)
       thor (~> 0.14)
@@ -62,6 +67,7 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.17.2)
     multi_json (1.1.0)
+    multi_xml (0.4.2)
     mysql2 (0.3.11)
     nokogiri (1.5.0)
     paperclip (2.7.0)
@@ -124,6 +130,7 @@ DEPENDENCIES
   coffee-rails (~> 3.1.0)
   haml (= 3.1.2)
   haml-rails
+  imdb_party
   jquery-rails
   json
   mysql2 (= 0.3.11)
