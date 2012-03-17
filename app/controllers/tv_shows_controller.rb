@@ -31,7 +31,16 @@ class TvShowsController < ApplicationController
       format.json { render :json => @tv_show }
     end
   end
+  
+  def top_shows
+    @tv_shows = TopShow.all
+    render "tv_shows/top_shows"
+  end
 
+  def all_shows
+    @tv_shows = TvShow.all
+    render "tv_shows/all_shows"
+  end
   # GET /tv_shows/1/edit
   def edit
     @tv_show = TvShow.find(params[:id])

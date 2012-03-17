@@ -1,27 +1,32 @@
+=render :partial => 'shared/nav_bar'
+/Refactor This to a partial!!!
 %table#favshows{:class => "table table-striped"}
   %thead
     %tr
-      %th{:style => "background-color: #FFFFFF;"}Favorite Shows
+      %th{:style => "background-color: #FFFFFF;"}Top Shows
+      %th Position
       %th Show Name
       %th Network
       %th Air Time
       %th Last Airing
       %th Next Airing
   %tbody
-    - @tv_shows.each do |tv_show|
+    - @tv_shows.each do |top_show|
       %tr
         %td
-          =image_tag(tv_show.icon(:large))
+          =image_tag(top_show.tv_show.icon(:large))
+        %td
+          =top_show.position + 1
         %td 
-          =link_to tv_show.name, tv_show
+          =link_to top_show.tv_show.name, top_show.tv_show
         %td
-          =tv_show.network
+          =top_show.tv_show.network
         %td
-          =tv_show.air_time
+          =top_show.tv_show.air_time
         %td
-          =TvShowsHelper.last_air_date(tv_show)
+          =TvShowsHelper.last_air_date(top_show.tv_show)
         %td
-          =TvShowsHelper.next_air_date(tv_show)
+          =TvShowsHelper.next_air_date(top_show.tv_show)
 
 -content_for :head do
   =javascript_include_tag "jquery.tablesorter.min.js"
