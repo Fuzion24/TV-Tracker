@@ -17,7 +17,8 @@
         %td
           =tv_show.network
         %td
-          =tv_show.air_time
+          -if !tv_show.air_time.nil?
+            =tv_show.air_time.strftime("%I:%M %p")
         %td
           =TvShowsHelper.last_air_date(tv_show)
         %td

@@ -12,6 +12,6 @@
       - (-3..3).each do |offset| 
         %td{:style => "text-align: center;"}
           - UserHelper.episodestoday(@tv_shows, Date.today + offset).each do |tv_episode|
-            =render :partial => 'shared/tv_show_pill', :locals => {:showName => tv_episode.tv_season.tv_show.name, :episodeName => tv_episode.name} 
+            =render :partial => 'shared/tv_show_pill', :locals => {:showName => tv_episode.tv_season.tv_show.name, :episodeName => tv_episode.name, :airtime => tv_episode.tv_season.tv_show.air_time} 
             %br
 

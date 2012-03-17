@@ -1,18 +1,11 @@
 .clickable.five_rad.item
   .row-wrap
-    .meta-wrap
-      .name.column{:style => 'font-size: 130%;overflow:visible'}
-        =showName 
-      .meta.column.package{:style => 'font-size: 120%'}
-        =episodeName
-    %br.clear
-  .latest
-    .meta.column.menu.stop-prop
-      .dropdown.grey.hide.drop_actions
-        %span
-          %a{:href => 'soup'} soup
-    .meta.column.state
-      Options
-    .meta.column.fade-wrapper
-      .g-fade
+    .name.column{:style => 'font-size: 130%;overflow:visible'}
+      =showName 
+    .metaep.package{:style => 'font-size: 120%'}
+      =episodeName
+    .metatime.package
+      -if !airtime.nil?
+        =airtime.strftime("%I:%M %p")
+  %br.clear
   .clear

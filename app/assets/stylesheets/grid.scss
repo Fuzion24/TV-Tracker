@@ -157,6 +157,7 @@ ul#content-header-nav {
   border: 2px solid $med-grey;
   margin: 0 18px 18px 0;
   float: left;
+  text-align:left;
   font-size: .80em;
   min-width: 230px;
   max-width: 230px;
@@ -188,7 +189,7 @@ ul#content-header-nav {
     right: 0;
     background: url('/assets/grid-fade.png') top right repeat-y;}
   .latest {
-    clear:  both;
+    clear:  none;
     width: 100%;
     margin-top: 8px;
     border-top: 1px solid #eaeaea;
@@ -224,11 +225,21 @@ ul#content-header-nav {
       color: #000;
       &:hover{
         text-decoration: underline } } }
-  .meta {
+  .metatime{
+    float:right;
+    clear:right; 
     color: #777;
-    font-size: 1.0em;
+    font-size: 1.25em;
     margin-bottom: 1px;
-    margin-top: 5px; } }
+    margin-top: 5px; }
+
+  .metaep {
+    color: #777;
+    font-size: 1.35em;
+    margin-bottom: 1px;
+    margin-top: 5px;
+    float:left;
+    clear:left; } }
 
 .meta.column.menu.placeholder {
   padding: 8px 0px !important;
