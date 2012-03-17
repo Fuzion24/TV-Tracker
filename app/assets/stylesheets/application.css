@@ -5,5 +5,9 @@
  *= require_self
  *= require_tree . 
 */
-
+/*
 *= require bootstrap
+
+*= require global
+*= require rounded
+*= require colors*/
