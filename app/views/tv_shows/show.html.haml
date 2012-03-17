@@ -5,16 +5,19 @@
     %h1=@tv_show.name
   .row-fluid
     .span2
-      =image_tag(@tv_show.icon(:large))
+      =image_tag(@tv_show.icon(:xlarge))
     .span4
       .well
         %h2=@tv_show.description
   .row-fluid
     .well
       %h1 
-        Airing next in 
-        =(TvShowsHelper.next_air_date(@tv_show) - Date.today)
-        days from now on
-        =TvShowsHelper.next_air_date(@tv_show)
+        -if TvShowsHelper.next_air_date(@tv_show).is_a? Date
+          Airing next in 
+          =(TvShowsHelper.next_air_date(@tv_show) - Date.today)
+          days from now on
+          =TvShowsHelper.next_air_date(@tv_show)
+        -else
+          =TvShowsHelper.next_air_date(@tv_show)
 
 =render :partial => 'tv_seasons/tv_seasons'

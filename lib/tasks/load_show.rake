@@ -10,6 +10,10 @@ namespace :tv_show do
 		end
 	end
 
+	task :top_shows => :environment do |t,args|
+		ImdbScraper.top_shows
+	end
+
 	task :scrape_all  => :environment do |t, args|
 		TvShow.destroy_all
 		shows = File.new("#{Rails.root}/db/fixtures/SeedShows",'r')
@@ -27,7 +31,7 @@ namespace :tv_show do
 			begin
 				prepped_name = WikiScraper.prepare_show_name(show_name)
 				tv_show = WikiScraper.scrape_show(prepped_name)
-				ConvertShow.persist_tv_show(tv_show,true)
+				ConvertShow.persist_tv_show(tv_show,false)
 			rescue
 				puts "WikiScraper Failed to scan #{show_name}"
 			end

@@ -1,5 +1,11 @@
-.well
-  %h1 Airing Today -- blah blah blah
+-if UserHelper.episodestoday(@tv_shows, Date.today).count != 0
+  %h1 Airing Today
+  .well
+    -UserHelper.episodestoday(@tv_shows, Date.today).each do |tv_episode|
+      =link_to tv_episode.tv_season.tv_show.name, tv_episode.tv_season.tv_show
+      \--
+      =link_to tv_episode.name, tv_episode
+      %br
 %table{:class => "table table-striped"}
   %tr
     %th Show Name
