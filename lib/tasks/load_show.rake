@@ -27,7 +27,7 @@ namespace :tv_show do
 			begin
 				prepped_name = WikiScraper.prepare_show_name(show_name)
 				tv_show = WikiScraper.scrape_show(prepped_name)
-				ConvertShow.persist_tv_show(tv_show,true)
+				ConvertShow.persist_tv_show(tv_show,false)
 			rescue
 				puts "WikiScraper Failed to scan #{show_name}"
 			end
