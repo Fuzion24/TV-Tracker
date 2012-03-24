@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   def shows
-  	@user_episodes = User.first.tv_episodes
-    @tv_shows = TvShow.all
+    @user_episodes = User.first.tv_episodes
+    @tv_shows = current_user.tv_shows
   end
   
   def new
