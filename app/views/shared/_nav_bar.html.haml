@@ -17,3 +17,12 @@
                 %a{:href => "#"} Link
               %li
                 %a{:href => "#"} Link2
+
+        -if current_user
+          %li  
+            =link_to "Logout", :logout
+        -else
+          %li
+            =link_to "Register", :register
+          %li
+            =link_to "Login", :login

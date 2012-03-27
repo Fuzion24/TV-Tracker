@@ -31,3 +31,4 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'ruby-debug'
 gem 'haml-rails'
+gem 'authlogic' # needs commit-> https://github.com/stephenprater/authlogic/commit/41eba3daa84503f9634ff69940ce718b87b8a521

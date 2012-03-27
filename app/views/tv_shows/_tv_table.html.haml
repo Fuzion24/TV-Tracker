@@ -5,6 +5,9 @@
       =link_to tv_episode.tv_season.tv_show.name, tv_episode.tv_season.tv_show
       \--
       =link_to tv_episode.name, tv_episode
+      -if !tv_episode.tv_season.tv_show.air_time.nil? 
+        \--
+        =tv_episode.tv_season.tv_show.air_time.strftime("%I:%M %p")
       %br
 %table{:class => "table table-striped"}
   %tr
