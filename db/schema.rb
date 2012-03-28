@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120317013816) do
+ActiveRecord::Schema.define(:version => 20120324185058) do
 
   create_table "top_shows", :force => true do |t|
     t.integer  "tv_show_id"
@@ -88,11 +88,12 @@ ActiveRecord::Schema.define(:version => 20120317013816) do
     t.string   "handle"
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "hashed_password"
     t.string   "salt"
     t.string   "role"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "crypted_password"
+    t.string   "persistence_token"
   end
 
 end

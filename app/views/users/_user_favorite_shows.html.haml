@@ -11,6 +11,8 @@
     - @tv_shows.each do |tv_show|
       %tr
         %td
+          =link_to "Add Show", :controller => "users", :action => "add_show", :id => tv_show
+        %td
           =image_tag(tv_show.icon(:large))
         %td 
           =link_to tv_show.name, tv_show

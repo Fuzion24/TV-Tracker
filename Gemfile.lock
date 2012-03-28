@@ -31,6 +31,9 @@ GEM
     activesupport (3.1.0)
       multi_json (~> 1.0)
     arel (2.2.3)
+    authlogic (3.1.0)
+      activerecord (>= 3.0.7)
+      activerecord (>= 3.0.7)
     bcrypt-ruby (3.0.1)
     builder (3.0.0)
     cocaine (0.2.1)
@@ -127,6 +130,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  authlogic
   coffee-rails (~> 3.1.0)
   haml (= 3.1.2)
   haml-rails
