@@ -13,8 +13,12 @@ class UsersController < ApplicationController
     end
   end
   def add_show
-    current_user.tv_shows << TvShow.find(params[:id])
-    redirect_to :controller => "tv_shows", :action => "all_shows"
+    if current_user
+      current_user.tv_shows << TvShow.find(params[:id])
+      redirect_to :controller => "tv_shows", :action => "all_shows"
+    else 
+      redirect_to "/login"
+    end
   end
 
    def create

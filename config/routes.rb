@@ -1,6 +1,7 @@
 TvTracker::Application.routes.draw do
   root :to => 'home#index'
-  match "/my_shows" => "users#shows"
+  match "/my_shows" => "users#shows", :constraints => LoggedInConstraint.new
+  match "/my_shows" => 'users#new', :as =>:register
   match "user/add_show/:id" => "users#add_show"
   match "/top_shows" => "tv_shows#top_shows"
   match "/all_shows" => "tv_shows#all_shows"
